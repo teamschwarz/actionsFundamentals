@@ -1,12 +1,14 @@
 name: dump contexts
 on: [workflow_dispatch]
+env:  # Workflow level environment variables
+  WORKFLOW_LEVEL_ENV: "Workflow level environment variable"
 
 jobs:
   dump_context:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12, 14, 16]
+        node-version: [12]
     steps:
       - name: Dump matrix context
         run: |
@@ -28,3 +30,15 @@ jobs:
           echo "::group::Runner Context"
           echo "${{ toJson(runner) }}"
           echo "::endgroup::"
+  myJob:
+    runs-on: ubuntu-latest
+    env:  # Job level environment variables
+      JOB_LEVEL_ENV: "Job level environment variable"
+    steps:
+    - name: My step
+    step:  # Step level environment variables
+      STEP_LEVEL_ENV: "Step level environment variable"
+    run: |
+      echo $WORKFLOW_LEVEL_ENV
+      echo $JOB_LEVEL_ENV
+      echo $STEP_LEVEL_ENV
