@@ -9,18 +9,22 @@ jobs:
         node-version: [12, 14, 16]
     steps:
       - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
+        run: |
+          echo "::group::Matrix Context"
+          echo "${{ toJson(matrix) }}"
+          echo "::endgroup::"
       - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: |
+          echo "::group::GitHub Context"
+          echo "${{ toJson(github) }}"
+          echo "::endgroup::"
       - name: Dump environment context
-        env:
-          ENV_CONTEXT: ${{ toJson(env) }}
-        run: echo "$ENV_CONTEXT"
+        run: |
+          echo "::group::Environment Context"
+          echo "${{ toJson(env) }}"
+          echo "::endgroup::"
       - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
+        run: |
+          echo "::group::Runner Context"
+          echo "${{ toJson(runner) }}"
+          echo "::endgroup::"
